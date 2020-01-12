@@ -20,9 +20,9 @@ from keras.utils import multi_gpu_model
 
 class YOLO(object):
     _defaults = {
-        "model_path": 'model_data/yolo.h5',
-        "anchors_path": 'model_data/yolo_anchors.txt',
-        "classes_path": 'model_data/coco_classes.txt',
+        "model_path": 'model_data/newanchor_yolo.h5',
+        "anchors_path": 'model_data/test_new_anchors.txt',
+        "classes_path": 'model_data/voc_classes.txt',
         "score" : 0.3,
         "iou" : 0.45,
         "model_image_size" : (416, 416),
@@ -46,7 +46,7 @@ class YOLO(object):
 
     def _get_class(self):
         classes_path = os.path.expanduser(self.classes_path)
-        with open(classes_path) as f:
+        with open(classes_path,encoding="utf-8") as f:
             class_names = f.readlines()
         class_names = [c.strip() for c in class_names]
         return class_names
@@ -126,16 +126,18 @@ class YOLO(object):
 
         print('Found {} boxes for {}'.format(len(out_boxes), 'img'))
 
-        font = ImageFont.truetype(font='font/FiraMono-Medium.otf',
+        font = ImageFont.truetype(font='font/AdobeKaitiStd-Regular.otf',
                     size=np.floor(3e-2 * image.size[1] + 0.5).astype('int32'))
         thickness = (image.size[0] + image.size[1]) // 300
 
+        result = []
         for i, c in reversed(list(enumerate(out_classes))):
             predicted_class = self.class_names[c]
             box = out_boxes[i]
             score = out_scores[i]
 
             label = '{} {:.2f}'.format(predicted_class, score)
+            image = image.convert('RGB')
             draw = ImageDraw.Draw(image)
             label_size = draw.textsize(label, font)
 
@@ -145,6 +147,7 @@ class YOLO(object):
             bottom = min(image.size[1], np.floor(bottom + 0.5).astype('int32'))
             right = min(image.size[0], np.floor(right + 0.5).astype('int32'))
             print(label, (left, top), (right, bottom))
+            result.append({predicted_class:(int(left),int(top),int(right),int(bottom))})
 
             if top - label_size[1] >= 0:
                 text_origin = np.array([left, top - label_size[1]])
@@ -159,12 +162,12 @@ class YOLO(object):
             draw.rectangle(
                 [tuple(text_origin), tuple(text_origin + label_size)],
                 fill=self.colors[c])
-            draw.text(text_origin, label, fill=(0, 0, 0), font=font)
+            draw.text(text_origin,label, fill=(0, 0, 0), font=font)
             del draw
 
         end = timer()
         print(end - start)
-        return image
+        return image,result
 
     def close_session(self):
         self.sess.close()

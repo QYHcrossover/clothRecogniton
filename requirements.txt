@@ -1,0 +1,7 @@
+keras
+numpy
+pillow
+Flask
+h5py
+matplotlib
+tensorflow==1.6.0

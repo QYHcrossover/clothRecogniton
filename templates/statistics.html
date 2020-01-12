@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>“智布”布匹瑕疵识别系统</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
+	<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css"/>
+	<script type="text/javascript" src="../static/js/echarts.js"></script>
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index.html">“智布”</a>
+			</div>
+
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li><a href="index.html">主页<span class="sr-only">(current)</span></a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">附加功能<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="datas.html">数据集分析</a></li>
+							<li><a href="standard.html">瑕疵识别标准</a></li>
+							<li class="active"><a href="statistics.html">识别数据统计</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="#footer">关于系统</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div><!-- /.navbar-collapse -->
+		</div><!-- /.container-fluid -->
+	</nav>
+	<div class="main container">
+		<div class="page-header">
+			<h1>识别数据统计 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <small>查看历史识别记录</small></h1>
+		</div>
+	</div>
+	
+	<div class="container">
+		<ul class="nav nav-pills nav-tabs" id="nav" role="tablist">
+			<li role="presentation" class="active"><a href="#today" aria-controls="today" role="tab" data-toggle="tab">今天</a></li>
+			<li role="presentation"><a href="#yesterday" aria-controls="yesterday" role="tab" data-toggle="tab">昨天</a></li>
+			<li role="presentation"><a href="#date" aria-controls="date" role="tab" data-toggle="tab" id="data">选择日期 <span class="glyphicon glyphicon-calendar"></span></a></li>
+
+		</ul>
+
+		<div class="tab-content">
+			<div role="tabpanel" class="tab-pane active" id="today">
+				<div class="container chart">
+					<div class="col-md-6 col-xs-12" >
+						<div id="chart1"></div>
+					</div>
+					<div class="col-md-6 col-xs-12">
+						<div id="chart2"></div>
+					</div>
+				</div>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="yesterday">
+				<div class="container chart">
+					<div class="col-md-6 col-xs-12" >
+						<div id="chart3"></div>
+					</div>
+					<div class="col-md-6 col-xs-12">
+						<div id="chart4"></div>
+					</div>
+				</div>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="date">
+				<div class="container chart">
+					<div class="col-md-6 col-xs-12" >
+						<div id="chart5"></div>
+					</div>
+					<div class="col-md-6 col-xs-12">
+						<div id="chart6"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+		
+	<footer id="footer">
+		<p class="text-center footer">COPYRIGHT © zhibu 2019. ALL RIGHT RESERVED.</p>
+		<p class="text-center">MADE WITH <span class="
+			glyphicon glyphicon-heart"></span> BY HHUC hjm</p>
+		</footer>
+		<script type="text/javascript" src="../static/js/jquery.min.js"></script>
+		<script type="text/javascript" src="../static/js/selectImg.js"></script>
+		<script type="text/javascript" src="../static/js/laydate.js"></script>
+		<script type="text/javascript" src="../static/js/statistics.js"></script>
+		<script type="text/javascript" src="../static/js/bootstrap.min.js"></script>
+	</body>
+	</html>

@@ -39,7 +39,7 @@ def _main():
     early_stopping = EarlyStopping(monitor='val_loss', min_delta=0, patience=10, verbose=1)
 
     val_split = 0.1
-    with open(annotation_path) as f:
+    with open(annotation_path,encoding="utf-8") as f:
         lines = f.readlines()
     np.random.seed(10101)
     np.random.shuffle(lines)
@@ -54,7 +54,7 @@ def _main():
             # use custom yolo_loss Lambda layer.
             'yolo_loss': lambda y_true, y_pred: y_pred})
 
-        batch_size = 32
+        batch_size = 1
         print('Train on {} samples, val on {} samples, with batch size {}.'.format(num_train, num_val, batch_size))
         model.fit_generator(data_generator_wrapper(lines[:num_train], batch_size, input_shape, anchors, num_classes),
                 steps_per_epoch=max(1, num_train//batch_size),
@@ -89,7 +89,7 @@ def _main():
 
 def get_classes(classes_path):
     '''loads the classes'''
-    with open(classes_path) as f:
+    with open(classes_path,encoding="utf-8") as f:
         class_names = f.readlines()
     class_names = [c.strip() for c in class_names]
     return class_names
@@ -102,7 +102,7 @@ def get_anchors(anchors_path):
     return np.array(anchors).reshape(-1, 2)
 
 
-def create_model(input_shape, anchors, num_classes, load_pretrained=True, freeze_body=2,
+def create_model(input_shape, anchors, num_classes, load_pretrained=False, freeze_body=2,
             weights_path='model_data/yolo_weights.h5'):
     '''create the training model'''
     K.clear_session() # get a new session
