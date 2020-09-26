@@ -4,4 +4,4 @@ pillow
 Flask
 h5py
 matplotlib
-tensorflow==1.6.0
+tensorflow==1.15.4
